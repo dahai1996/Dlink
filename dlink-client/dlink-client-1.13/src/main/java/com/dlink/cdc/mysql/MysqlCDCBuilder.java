@@ -41,7 +41,6 @@ import com.dlink.model.FlinkCDCConfig;
 import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 import com.ververica.cdc.connectors.mysql.source.MySqlSourceBuilder;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;
-import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
 
 /**
  * MysqlCDCBuilder
@@ -121,7 +120,7 @@ public class MysqlCDCBuilder extends AbstractCDCBuilder implements CDCBuilder {
             sourceBuilder.tableList(new String[0]);
         }
 
-        sourceBuilder.deserializer(new JsonDebeziumDeserializationSchema());
+        sourceBuilder.deserializer(new UTCJsonDebeziumDeserializationSchema());
         sourceBuilder.debeziumProperties(debeziumProperties);
         sourceBuilder.jdbcProperties(jdbcProperties);
 

@@ -37,11 +37,5 @@
             <artifactId>dlink-connector-jdbc-1.13</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.ververica</groupId>
-            <artifactId>flink-sql-connector-mysql-cdc</artifactId>
-            <version>2.2.1</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>

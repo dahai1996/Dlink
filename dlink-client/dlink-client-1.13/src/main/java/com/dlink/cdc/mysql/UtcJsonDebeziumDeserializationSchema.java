@@ -12,25 +12,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * @author sqh
- */
-public class UTCJsonDebeziumDeserializationSchema implements DebeziumDeserializationSchema<String> {
+public class UtcJsonDebeziumDeserializationSchema implements DebeziumDeserializationSchema<String> {
     private static final long serialVersionUID = 1L;
-    private transient JsonConverter jsonConverter;
     private final Boolean includeSchema;
+    private transient JsonConverter jsonConverter;
     private Map<String, Object> customConverterConfigs;
 
-    public UTCJsonDebeziumDeserializationSchema() {
+    public UtcJsonDebeziumDeserializationSchema() {
         this(false);
     }
 
-    public UTCJsonDebeziumDeserializationSchema(Boolean includeSchema) {
+    public UtcJsonDebeziumDeserializationSchema(Boolean includeSchema) {
         this.includeSchema = includeSchema;
     }
 
-    public UTCJsonDebeziumDeserializationSchema(Boolean includeSchema, Map<String, Object> customConverterConfigs) {
+    public UtcJsonDebeziumDeserializationSchema(
+            Boolean includeSchema, Map<String, Object> customConverterConfigs) {
         this.includeSchema = includeSchema;
         this.customConverterConfigs = customConverterConfigs;
     }
@@ -40,7 +37,9 @@ public class UTCJsonDebeziumDeserializationSchema implements DebeziumDeserializa
         if (this.jsonConverter == null) {
             this.initializeJsonConverter();
         }
-        byte[] bytes = this.jsonConverter.fromConnectData(record.topic(), record.valueSchema(), record.value());
+        byte[] bytes =
+                this.jsonConverter.fromConnectData(
+                        record.topic(), record.valueSchema(), record.value());
         out.collect(new String(bytes, StandardCharsets.UTF_8));
     }
 
